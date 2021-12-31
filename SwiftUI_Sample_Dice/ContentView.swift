@@ -8,9 +8,32 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var rolledNumber = 1
+    @State var rolledIt = false
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        VStack {
+            Image(rolledIt ? "\(rolledNumber)" : "unknown")
+                .resizable()
+                .frame(width: 100, height: 100)
+                .aspectRatio(contentMode: .fit)
+                .clipped()
+                .padding(.top, 250)
+            
+            Spacer()
+            
+            Button(action: {
+                let randomNumber = Int.random(in: 1 ..< 7)
+                self.rolledNumber = randomNumber
+                self.rolledIt = true
+            })
+            {
+                RollButton()
+            }
+            .padding(.bottom, 40)
+
+        }
     }
 }
 
